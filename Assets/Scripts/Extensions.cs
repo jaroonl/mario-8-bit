@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public static class Extensions
 {
@@ -13,7 +15,7 @@ public static class Extensions
         }
 
         float radius = 0.25f;
-        float distance = 0.375f;
+        float distance = 0.85f;
 
         RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction, distance, layerMask);
         return hit.collider != null && hit.rigidbody != rigidbody;

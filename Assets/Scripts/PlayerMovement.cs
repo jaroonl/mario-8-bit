@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         camera = Camera.main;
+       
+        
     }
 
     private void Update() //checking input
@@ -44,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = Mathf.Max(velocity.y, 0f);
         jumping = velocity.y > 0f;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButton("Jump"))
         {
             velocity.y = jumpForce;
             jumping = true;
@@ -64,6 +66,8 @@ public class PlayerMovement : MonoBehaviour
     {
         inputAxis = Input.GetAxis("Horizontal");
         velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
+
+        
     }
 
     private void FixedUpdate() //helps with the boundaries of the screen
