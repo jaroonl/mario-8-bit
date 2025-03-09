@@ -5,9 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public int world { get; private set; }
-    public int stage { get; private set; }
-    public int lives { get; private set; }
 
     private void Awake()
     {
@@ -36,12 +33,6 @@ public class GameManager : MonoBehaviour
 
     private void NewGame()
     {
-        lives = 3;
-        LoadLevel();
-    }
-
-    private void LoadLevel()
-    {
         SceneManager.LoadScene("Map 1");
     }
 
@@ -51,20 +42,6 @@ public class GameManager : MonoBehaviour
     }
 
     public void ResetLevel()
-    {
-        lives--;
-        
-        if(lives > 0)
-        {
-            LoadLevel();
-        } else
-        {
-            GameOver();
-        }
-
-    }
-
-    private void GameOver()
     {
         NewGame();
     }
