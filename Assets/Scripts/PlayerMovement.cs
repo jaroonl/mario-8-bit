@@ -67,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
         inputAxis = Input.GetAxis("Horizontal");
         velocity.x = Mathf.MoveTowards(velocity.x, inputAxis * moveSpeed, moveSpeed * Time.deltaTime);
 
+        if(rigidbody.Raycast(Vector2.right * velocity.x))
+        {
+            velocity.x = 0;
+        }
         
     }
 
@@ -80,5 +84,25 @@ public class PlayerMovement : MonoBehaviour
         position.x = Mathf.Clamp(position.x, leftEdge.x + 0.5f, rightEdge.x - 0.5f);
 
         rigidbody.MovePosition(position);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            if(transform.DotTest(collision.transform, Vector2.down))
+            {
+                velocity.y = jumpForce / 2;
+                jumping  = true;
+            }
+        } 
+        else if (collision.gameObject.layer != LayerMask.NameToLayer("PowerUp"))
+        {
+            if(transform.DotTest(collision.transform, Vector2.up))
+            {
+                velocity.y = 0;
+            }
+        }
     }
 }
